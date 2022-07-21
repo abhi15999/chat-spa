@@ -4,16 +4,23 @@ import { Provider } from 'react-redux';
 import { store } from './app/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import './index.css';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import 'bulma/css/bulma.min.css';
+import SignUp from './components/SignUp/SignUp';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <Router>
+      <Provider store={store}>
+        <Routes>
+          <Route path='/' element={<App  />} />
+          <Route path='/sign-up' element={<SignUp />} />
+        </Routes>        
+      </Provider>
+    </Router>
   </React.StrictMode>
 );
 
