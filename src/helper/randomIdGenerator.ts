@@ -1,6 +1,5 @@
-import crypto from "crypto";
 /**
- * Creates a unique and random 16 bits string, using crypto library
- * @returns {string} Random string of 16 bits
+ * Creates a unique and random string
+ * @returns {string} Random userId
  */
-export const randIdGen = (): string => crypto.randomBytes(16).toString("hex");
+export const randIdGen = (): string => Math.random().toString(36).slice(2);

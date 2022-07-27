@@ -1,5 +1,5 @@
 // import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom"
-import SignUp from "./components/SignUp/SignUp";
+// import SignUp from "./components/SignUp/SignUp";
 
 function App() {
   return (

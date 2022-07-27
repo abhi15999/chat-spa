@@ -7,6 +7,8 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import 'bulma/css/bulma.min.css';
 import SignUp from './components/SignUp/SignUp';
+import Login from './components/Login/Login';
+import Dashboard from './components/Dashboard/Dashboard';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -18,6 +20,8 @@ root.render(
         <Routes>
           <Route path='/' element={<App  />} />
           <Route path='/sign-up' element={<SignUp />} />
+          <Route path='/login' element={<Login />} />
+          <Route path="/dashboard/:id" element={<Dashboard />} />
         </Routes>        
       </Provider>
     </Router>
