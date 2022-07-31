@@ -1,5 +1,6 @@
 {
   "name": "chat-spa",
+  "homepage": "https://abhi15999.github.io/chat-spa",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
