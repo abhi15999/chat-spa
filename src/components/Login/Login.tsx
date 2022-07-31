@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { UserDoc } from '../../data/Interfaces/User';
-import { User } from '../../data/User';
+import { Users } from '../../data/Users';
 import { emailValid } from '../../helper/emailValid';
 import { useNavigate } from "react-router-dom"
 
@@ -11,17 +11,22 @@ const Login = () => {
     const [password, setPassword] = useState({ value: "", error: true });
     const [userExists, setUserExists] = useState({ exists: true , message: "" })
 
+
+    useEffect(() => {
+      const login = localStorage.getItem("userId");
+      if (login) navigate("/dashboard")
+    });
+
     const loginHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
-
-      const USERS = new User();
+      const USERS = new Users();
       const allUsers: UserDoc[] = USERS.getLocalUsers();
       if (Array.isArray(allUsers)) {
         const userExists = allUsers.filter(user => user.email === email.value && user.password === password.value);
         if (userExists && userExists.length) {
           USERS.setLoggedInUser({ userId: userExists[0].userId });
           // Redirect to Dashboard
-          navigate(`/dashboard/${userExists[0].userId}`)
+          navigate(`/dashboard`)
         } else {
           setUserExists({ exists: false, message: "Please check the credentials again" })
         }
@@ -54,6 +59,7 @@ const Login = () => {
         setPassword({ value: "", error: true })
       }
     }
+
 
     return (
         <div className="box" style={{ height: "100vh", width: "100%" }}>
