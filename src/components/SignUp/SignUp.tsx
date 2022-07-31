@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { emailValid } from "../../helper/emailValid";
 import { mobileValid } from "../../helper/mobileValid";
-import { User } from "../../data/User";
+import { Users } from "../../data/Users";
 import { useNavigate } from "react-router-dom";
 
 
@@ -20,7 +20,7 @@ const SignUp = () => {
       mobile: mobile.value,
       password: password.value
     }
-    const newUser = new User();
+    const newUser = new Users();
     const allUsers = newUser.getLocalUsers();
     if (Array.isArray(allUsers)) {
       const userExists = allUsers.filter(user => user.email === email.value);
@@ -78,7 +78,6 @@ const SignUp = () => {
 
   const rePasswordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const rePasswordReceived = e.target.value;
-    console.log({ rePasswordReceived })
     if (rePasswordReceived && rePasswordReceived.length > 0 && rePasswordReceived.match(password.value)) {
       setRePassword({ error: false })
     } else {
