@@ -85,16 +85,10 @@ const SignUp = () => {
     }
   }
 
-
-
   return (
     <>
       {/* is-flex is-justify-content-space-between is-align-content-center */}
       <div className="box" style={{ height: "100vh", width: "100%" }}>
-        <div>
-          <h1>Sign Up Design Left side</h1>
-        </div>
-
         <div>
           <form className="box">
             <div className="field">
@@ -178,7 +172,7 @@ const SignUp = () => {
             <button
               className="button is-primary"
               onClick={signupHandler}
-              disabled={email.error || password.error || rePassword.error || mobile.error || userExists.exists}
+              disabled={email.error || password.error || rePassword.error || mobile.error}
             >
               Sign in
             </button>

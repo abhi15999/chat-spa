@@ -5,7 +5,6 @@ import { Users } from "../../data/Users";
 import Chat from "../Chat/Chat";
 
 
-const loggedInuser = localStorage.getItem("userId")
 const user = new Users();
 const chat = new Chats();
 
@@ -71,7 +70,7 @@ const ChatWindow = (props: ChatWindowProps) => {
     return (
         <>
             {
-                selectedUser && loggedInuser
+                selectedUser && loggedInUser
                 ? 
                 <div className="box is-flex is-flex-direction-column is-justify-content-space-between" style={{ height: "100%", overflowY: "auto" }}>
                     
