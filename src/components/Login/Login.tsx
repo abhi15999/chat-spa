@@ -7,8 +7,8 @@ import { useNavigate } from "react-router-dom"
 const Login = () => {
 
     let navigate = useNavigate();
-    const [email, setEmail] = useState({ value: "", error: true });
-    const [password, setPassword] = useState({ value: "", error: true });
+    const [email, setEmail] = useState({ value: "", error: false });
+    const [password, setPassword] = useState({ value: "", error: false });
     const [userExists, setUserExists] = useState({ exists: true , message: "" })
 
 
@@ -62,57 +62,68 @@ const Login = () => {
 
 
     return (
-        <div className="box" style={{ height: "100vh", width: "100%" }}>
-            <form className="box">
-            <div className="field">
-              <label className="label">Email</label>
-              <div className="control has-icons-left has-icons-right">
-                <input
-                  className={`input ${email.error ? "is-danger" : "is-success"}`}
-                  type="email"
-                  placeholder="Enter your email"
-                  onBlur={emailHandler}
-                />
-                <span className="icon is-small is-left">
-                  <i className="fas fa-envelope"></i>
-                </span>
+      <section className='hero is-fullheight'>
+        <div className='hero-body'>
+          <div className='container'>
+            <div className='columns is-centered'>
+              <div className='column is-4-desktop is-12-mobile'>
+                <div className="box">
+                    <form>
+                    <div className="field">
+                      <label className="label">Email</label>
+                      <div className="control has-icons-left has-icons-right">
+                        <input
+                          className={`input ${email.error ? "is-danger" : "is-success"}`}
+                          type="email"
+                          placeholder="Enter your email"
+                          onBlur={emailHandler}
+                        />
+                        <span className="icon is-small is-left">
+                          <i className="fas fa-envelope"></i>
+                        </span>
+                      </div>
+                      {/* {email.error ? (
+                          <label className="label is-danger">
+                            <i className="fas fa-exclamation-circle"></i> Please enter a valid email
+                            ID.
+                          </label>
+                      ) : null} */}
+                    </div>
+                    <div className="field">
+                      <label className="label">Password</label>
+                      <div className="control has-icons-left has-icons-right">
+                        <input
+                          className={`input ${password.error ? "is-danger" : "is-success"}`}
+                          type="password"
+                          placeholder="Enter your password"
+                          onBlur={passwordHandler}
+                        />
+                        <span className="icon is-small is-left">
+                          <i className="fas fa-envelope"></i>
+                        </span>
+                      </div>
+                      {/* {password.error ? (
+                          <label className="label is-danger">
+                            <i className="fas fa-exclamation-circle"></i> Please enter a valid email
+                            ID.
+                          </label>
+                      ) : null} */}
+                    </div>
+                    <div className='is-flex is-justify-content-center'>
+                      <button className="button is-primary is-fullwidth-mobile" disabled={email.error || password.error} onClick={loginHandler}>Log in</button>
+                    </div>
+                    </form>
+                    {
+                    !userExists.exists
+                    ? <div className="box">{userExists.message}</div>
+                    : null
+                  }
+                </div>
               </div>
-              {/* {email.error ? (
-                  <label className="label is-danger">
-                    <i className="fas fa-exclamation-circle"></i> Please enter a valid email
-                    ID.
-                  </label>
-              ) : null} */}
             </div>
-            <div className="field">
-              <label className="label">Password</label>
-              <div className="control has-icons-left has-icons-right">
-                <input
-                  className={`input ${password.error ? "is-danger" : "is-success"}`}
-                  type="password"
-                  placeholder="Enter your password"
-                  onBlur={passwordHandler}
-                />
-                <span className="icon is-small is-left">
-                  <i className="fas fa-envelope"></i>
-                </span>
-              </div>
-              {/* {password.error ? (
-                  <label className="label is-danger">
-                    <i className="fas fa-exclamation-circle"></i> Please enter a valid email
-                    ID.
-                  </label>
-              ) : null} */}
-            </div>
-
-            <button className="button is-primary" disabled={email.error || password.error} onClick={loginHandler}>Log in</button>
-            </form>
-            {
-            !userExists.exists
-            ? <div className="box">{userExists.message}</div>
-            : null
-          }
+          </div>
         </div>
+      </section>
     )
 };
 
