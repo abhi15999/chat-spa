@@ -6,7 +6,7 @@ const ChatList = (props: ChatListProps) => {
             {
                 chats && chats.map((chat) =>{
                     return (
-                        <div onClick={() => selectUser(chat.userId)} key={chat.userId} className="box is-flex is-align-items-center is-justify-content-space-between" style={{ cursor: "pointer" }}>
+                        <div onClick={() => selectUser(chat.userId)} key={chat.userId} className="box is-flex is-align-items-center is-justify-content-space-between has-background-primary-light" style={{ cursor: "pointer"}}>
                             <figure className="image is-64x64">
                                 <img className="is-rounded" src="https://bulma.io/images/placeholders/128x128.png" alt="Some Pic" />
                             </figure>

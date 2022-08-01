@@ -17,13 +17,13 @@ const Navbar = () => {
     <button className={`navbar-burger burger ${active ? 'is-active' : ''}`} aria-label="menu" aria-expanded="false" data-target="navMenu" onClick={() =>{
       setActive(!active);
     }}>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
   </div>
 
-  <div id="navMenu" className="navbar-menu">
+  <div id="navMenu" className={`navbar-menu ${active ? 'is-active' : ''}`}>
     <div className="navbar-start">
       <div className="buttons">
         <button className="button navbar-item" onClick={() => navigate("/dashboard")}>

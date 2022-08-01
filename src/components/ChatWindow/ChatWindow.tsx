@@ -8,11 +8,25 @@ import Chat from "../Chat/Chat";
 const user = new Users();
 const chat = new Chats();
 
+
 const ChatWindow = (props: ChatWindowProps) => {
     const { selectedUser, loggedInUser } = props;
 
     const [message, setMessage] = useState<string>("")
     const [loggedInUserChats, setLoggedInUserChats] = useState<ChatDoc[] | []>([]);
+   
+    const getLoggedInUserChats = ({ loggedInUser, selectedUser }: ChatWindowProps) => {
+        const allUsers = user.getLocalUsers();
+        if (allUsers && allUsers.length > 0) {
+            const loggedInUserDetails = allUsers.filter((user) => user.userId === loggedInUser && user.chats[selectedUser] && user.chats[selectedUser].length);
+            if (loggedInUserDetails.length) {
+                const { chats } = loggedInUserDetails[0];
+                const chatsWithSelectedUser = [...chats[selectedUser]];
+                setLoggedInUserChats(chatsWithSelectedUser);
+            }
+            
+        }
+    }
 
     useEffect(() => {
         if (loggedInUser && selectedUser) {
@@ -23,23 +37,6 @@ const ChatWindow = (props: ChatWindowProps) => {
     }, [selectedUser, loggedInUser])
 
 
-    const getLoggedInUserChats = ({ loggedInUser, selectedUser }: ChatWindowProps) => {
-        const allUsers = user.getLocalUsers();
-        // debugger;
-        if (allUsers && allUsers.length > 0) {
-            // debugger;
-            const loggedInUserDetails = allUsers.filter((user) => user.userId === loggedInUser && user.chats[selectedUser] && user.chats[selectedUser].length);
-            // debugger;
-            if (loggedInUserDetails.length) {
-                const { chats } = loggedInUserDetails[0];
-                const chatsWithSelectedUser = [...chats[selectedUser]];
-                // debugger;
-                setLoggedInUserChats(chatsWithSelectedUser);
-            }
-            
-        }
-    }
-
     const createChat = ({ sentBy }: {sentBy: string}) => {
         const payload = {
             from: loggedInUser,
@@ -48,6 +45,8 @@ const ChatWindow = (props: ChatWindowProps) => {
         }
 
         chat.create(payload);
+        setMessage("");
+        getLoggedInUserChats({ loggedInUser, selectedUser });  
         
     }
 
@@ -55,9 +54,7 @@ const ChatWindow = (props: ChatWindowProps) => {
         e.preventDefault();
         createChat({ sentBy: loggedInUser });
         setTimeout(() => {
-            createChat({ sentBy: selectedUser})
-            setMessage("")
-            getLoggedInUserChats({ loggedInUser, selectedUser });  
+            createChat({ sentBy: selectedUser}) 
         }, 3000);
 
     };
@@ -72,7 +69,7 @@ const ChatWindow = (props: ChatWindowProps) => {
             {
                 selectedUser && loggedInUser
                 ? 
-                <div className="box is-flex is-flex-direction-column is-justify-content-space-between" style={{ height: "100%", overflowY: "auto" }}>
+                <div className="box is-flex is-flex-direction-column is-justify-content-space-between" style={{ height: "100%", overflowY: "auto", background: "#ffffd5" }}>
                     
                     <div>
                         {
@@ -91,8 +88,8 @@ const ChatWindow = (props: ChatWindowProps) => {
                         className="button is-primary"
                         onClick={(e) => { 
                             onSubmit(e);
-                            setMessage("")
-                            getLoggedInUserChats({ loggedInUser, selectedUser });  
+                            // setMessage("")
+                            // getLoggedInUserChats({ loggedInUser, selectedUser });  
                         }}
                         disabled={!message.length}
                         >
@@ -107,12 +104,6 @@ const ChatWindow = (props: ChatWindowProps) => {
 };  
 
 export default ChatWindow;
-
-
-// ChatWindow.defaultProps = {
-//     selectedUser: "",
-//     loggedInUser: ""
-// }
 
 interface ChatWindowProps {
     selectedUser: string,
