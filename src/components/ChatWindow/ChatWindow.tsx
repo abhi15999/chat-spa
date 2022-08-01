@@ -55,7 +55,7 @@ const ChatWindow = (props: ChatWindowProps) => {
         createChat({ sentBy: loggedInUser });
         setTimeout(() => {
             createChat({ sentBy: selectedUser}) 
-        }, 30000);
+        }, 3000);
 
     };
 
